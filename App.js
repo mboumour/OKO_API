@@ -61,8 +61,10 @@ app.post('/api/fiche-identite', (req, res) => {
 //   });
 
 
-// Port d'écoute du serveur
-const port = 3001;
-app.listen(port, () => {
-  console.log(`Le serveur est en écoute sur le port ${port}`);
+// Gérer les erreurs
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Une erreur est survenue !' });
 });
+
+module.exports = app;
